@@ -26,9 +26,11 @@ public class HelloEEGActivity extends Activity {
 	
 	public static  String Attention = "Attention";
 	public static  String Meditation = "Meditation";
+	public static String SERVER_URL = "http://192.168.0.105:8081";
 	
 	public static String ATT;
 	public static String MED;
+	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,7 +88,7 @@ public class HelloEEGActivity extends Activity {
                 break;
             case TGDevice.MSG_POOR_SIGNAL:
             		//signal = msg.arg1;
-            		tv.append("PoorSignal: " + msg.arg1 + "\n");
+            	//	tv.append("PoorSignal: " + msg.arg1 + "\n");
                 break;
             case TGDevice.MSG_RAW_DATA:	  
             		//raw1 = msg.arg1;
