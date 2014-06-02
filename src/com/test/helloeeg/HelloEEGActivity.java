@@ -5,11 +5,13 @@ import android.bluetooth.BluetoothAdapter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
+//import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.test.helloeeg.WriteToCSVFile;
+
 
 import com.neurosky.thinkgear.*;
 
@@ -22,6 +24,11 @@ public class HelloEEGActivity extends Activity {
 	TGDevice tgDevice;
 	final boolean rawEnabled = false;
 	
+	public static  String Attention = "Attention";
+	public static  String Meditation = "Meditation";
+	
+	public static String ATT;
+	public static String MED;
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -89,11 +96,22 @@ public class HelloEEGActivity extends Activity {
         		//tv.append("Heart rate: " + msg.arg1 + "\n");
                 break;
             case TGDevice.MSG_ATTENTION:
-            		//att = msg.arg1;
+            		int att = msg.arg1;
+            		ATT = String.valueOf(att);
+            		
+            		WriteToCSVFile csvWrite = new WriteToCSVFile();
+					csvWrite.generateCsvFile(Attention, ATT);	
+            		
             		tv.append("Attention: " + msg.arg1 + "\n");
             		//Log.v("HelloA", "Attention: " + att + "\n");
             	break;
             case TGDevice.MSG_MEDITATION:
+            	int med = msg.arg1;
+        		MED = String.valueOf(med);
+        		
+        		WriteToCSVFile csvWrite1 = new WriteToCSVFile();
+				csvWrite1.generateCsvFile(Meditation, MED);
+				
             	tv.append("Meditation: " + msg.arg1 + "\n");
             	break;
             case TGDevice.MSG_BLINK:
